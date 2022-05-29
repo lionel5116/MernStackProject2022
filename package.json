@@ -1,0 +1,34 @@
+{
+  "name": "mernstackproject2022",
+  "version": "1.0.0",
+  "description": "Mern Stack Project Brad Traversy",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server",
+    "server":"nodemon server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lionel5116/MernStackProject2022.git"
+  },
+  "author": "Lionel Jones",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lionel5116/MernStackProject2022/issues"
+  },
+  "homepage": "https://github.com/lionel5116/MernStackProject2022#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "config": "^3.3.7",
+    "express": "^4.18.1",
+    "express-validator": "^6.14.1",
+    "gravatar": "^1.8.2",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.3.4",
+    "request": "^2.88.2"
+  },
+  "devDependencies": {
+    "concurrently": "^7.2.1",
+    "nodemon": "^2.0.16"
+  }
+}
