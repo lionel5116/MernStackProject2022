@@ -1,3 +1,4 @@
 {
-    "mongoURI" : "mongodb+srv://lionel5116:Mag17615%40@cluster0.jwcnt.mongodb.net/?retryWrites=true&w=majority"
+    "mongoURI" : "mongodb+srv://lionel5116:Mag17615%40@cluster0.jwcnt.mongodb.net/?retryWrites=true&w=majority",
+    "jwtSecretToken":"mysecrettoken"
 }
