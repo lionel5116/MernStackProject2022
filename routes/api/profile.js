@@ -20,7 +20,7 @@ router.get('/me',auth, async (req,res) =>  {
    res.json(profile);
 
   }catch(err){
-    console.err(err.message);
+     console.log(err.message);
      res.status(500).send('Server error!!!!')
     }
   
@@ -101,6 +101,60 @@ router.post('/',[auth,
    }
   );
 
+//npm run server
+//@route GET api/profile/ 
+//@ desc GET all profiles
+//@access public - NO NEED TO USE THE AUTH MIDDLEWARE WHHEN PUBLIC
+router.get('/',async (req,res) => {
+  try {
+      const profiles = await Profile.find().populate('user',['name','avatar']);
+      res.json(profiles)
+  } catch (err) {
+    console.log(err.message);
+    res.status(500).send('Server error!!!!');
+  }
+}) ;
+
+//npm run server
+//@route GET api/profile/user/:user_id
+//@ desc GET profile by userid
+//@access public - NO NEED TO USE THE AUTH MIDDLEWARE WHHEN PUBLIC
+router.get('/user/:user_id',async (req,res) => {
+    try {
+        const profile = await Profile.findOne({user:req.params.user_id}).populate('user',['name','avatar']);
+        if(!profile) {
+            return res.status(400).json({msg:'Profile not found'});
+        }
+        res.json(profile)
+    } catch (err) {
+      console.log(err.message);
+      if(err.kind == 'ObjectId')
+      {
+        return res.status(400).json({msg:'Profile not found'});
+      }
+      res.status(500).send('Server error!!!!');
+    }
+  }) ;
+
+//npm run server
+//@route DELETE api/profile 
+//@ desc Delete profile, user & posts
+//@access priivate 
+router.delete('/',auth,async (req,res) => {
+    try {
+        //@todo - remove users post
+        //remove profile
+        await Profile.findOneAndRemove({user:req.user.id});
+        //remove user
+        await User.findOneAndRemove({_id:req.user.id});
+
+        res.json({msg:'user deletedd'});
+    } catch (err) {
+      console.log(err.message);
+      res.status(500).send('Server error!!!!');
+    }
+  }) ;
   
+
 
 module.exports = router;
