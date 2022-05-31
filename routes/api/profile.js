@@ -139,7 +139,7 @@ router.get('/user/:user_id',async (req,res) => {
 //npm run server
 //@route DELETE api/profile 
 //@ desc Delete profile, user & posts
-//@access priivate 
+//@access priivate  - USE ATUH MIDDLEWARE WHEN PROVIDING A TOKEN!!!!!
 router.delete('/',auth,async (req,res) => {
     try {
         //@todo - remove users post
