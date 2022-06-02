@@ -139,7 +139,7 @@ router.get('/user/:user_id',async (req,res) => {
 //npm run server
 //@route DELETE api/profile 
 //@ desc Delete profile, user & posts
-//@access priivate  - USE ATUH MIDDLEWARE WHEN PROVIDING A TOKEN!!!!!
+//@access private  - USE ATUH MIDDLEWARE WHEN PROVIDING A TOKEN!!!!!
 router.delete('/',auth,async (req,res) => {
     try {
         //@todo - remove users post
@@ -155,6 +155,70 @@ router.delete('/',auth,async (req,res) => {
     }
   }) ;
   
+//npm run server
+//@route PUT api/profile/experience 
+//@ desc add profile experience
+//@access private  - USE ATUH MIDDLEWARE WHEN PROVIDING A TOKEN!!!!!
+router.put('/experience', [auth,
+   [ 
+    check('title','Title is required').not().isEmpty(),
+    check('company','Company is required').not().isEmpty(),
+    check('from','From date is required').not().isEmpty()]
+   ], async (req,res) => {
+    
+   const errors = validationResult(req);
+   if(!errors.isEmpty()) {
+     return res.status(400).json({errors:errors.array()});
+   } 
 
+   const {
+     title,
+     company,
+     from,
+     to,
+     current,
+     description    
+   } = req.body
 
+   const newExp = {
+    title,
+     company,
+     from,
+     to,
+     current,
+     description 
+   }
+
+   try {
+     const profile = await Profile.findOne({user: req.user.id});
+     profile.experience.unshift(newExp);  //unshift is the same as push to front of array
+     await profile.save();
+     res.json(profile);
+
+   } catch (err) {
+    console.log(err.message);
+    res.status(500).send('Server error');
+   }
+});
+
+//npm run server
+//@route DELETE api/profile/experience/:exp_id
+//@ desc Delete experience from profile with profile internal ID
+//@access private 
+router.delete('/experience/:exp_id',auth, async (req,res) => {
+  try {
+    const profile = await Profile.findOne({user: req.user.id});
+
+    //get the remove index (in which is our interal profile id on our profile)
+    const removeIndex = profile.experience.map(item => item.id).indexOf(req.params.exp_id);
+
+    profile.experience.splice(removeIndex,1);
+    await profile.save();
+    res.json(profile);
+
+  } catch (err) {
+    console.log(err.message);
+    res.status(500).send('Server error!!!!');
+  }
+})
 module.exports = router;
