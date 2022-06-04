@@ -1,7 +1,13 @@
 import React , {Fragment,useState} from 'react'
-import axios from 'axios';
+import { connect } from 'react-redux';
+import {Link} from 'react-router-dom';
+//import axios from 'axios';
+import { setAlert } from '../../actions/alert';
+import PropTypes from 'prop-types';
 
-const Register = () => {
+//below we are using destructuring (as opposee to using props), when we want to call,
+// we dont need to add props.setAlert, just set alert
+const Register = ({setAlert}) => {
   const[formData,setFormData] = useState( {
       name:'',
       email:'',
@@ -17,10 +23,11 @@ const onSubmit = async e => {
     e.preventDefault();
     
     if(password !== password2){
-      console.log('password do not match')
+       setAlert('password do not match','danger');
     }
     else{
-       const newwUser = {
+       /*
+        const newwUser = {
         name,
         email,
         password
@@ -41,6 +48,8 @@ const onSubmit = async e => {
        } catch (err) {
            console.log(err.response.data)
        }
+       */
+      console.log('SUCCESS')
     }
 }
 
@@ -99,11 +108,18 @@ const onSubmit = async e => {
           <input type='submit' className='btn btn-primary' value='Register' />
         </form>
         <p className='my-1'>
-          Already have an account? <a href='login.html'>Sign In</a>
+          Already have an account? 
+           <Link to='/Login' className="btn btn-light">
+            Sign In
+          </Link>
         </p>
       </section>
     </Fragment>
   );
 }
 
-export default Register
+Register.propTypes = {
+  setAlert: PropTypes.func.isRequired
+}
+
+export default connect(null,{setAlert})(Register)
