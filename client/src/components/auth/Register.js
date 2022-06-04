@@ -26,9 +26,6 @@ const onSubmit = async e => {
        setAlert('password do not match','danger');
     }
     else{
-      console.log(name)
-      console.log(email)
-      console.log(password)
       register({name,email,password})
     }
 }
