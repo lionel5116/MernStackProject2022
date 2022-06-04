@@ -1,13 +1,13 @@
 import React , {Fragment,useState} from 'react'
 import { connect } from 'react-redux';
 import {Link} from 'react-router-dom';
-//import axios from 'axios';
 import { setAlert } from '../../actions/alert';
+import { register } from '../../actions/auth';
 import PropTypes from 'prop-types';
 
 //below we are using destructuring (as opposee to using props), when we want to call,
 // we dont need to add props.setAlert, just set alert
-const Register = ({setAlert}) => {
+const Register = ({setAlert,register}) => {
   const[formData,setFormData] = useState( {
       name:'',
       email:'',
@@ -26,30 +26,10 @@ const onSubmit = async e => {
        setAlert('password do not match','danger');
     }
     else{
-       /*
-        const newwUser = {
-        name,
-        email,
-        password
-       }
-
-       try {
-         const config = {
-             headers: {
-                 'Content-Type':'application/json'
-             }
-         }
-
-        const body = JSON.stringify(newwUser);
-        // "proxy":"http://localhost:5000"    we are able to use the /api/users below because we added a proxy in our package.json file
-        const res = await axios.post('/api/users',body,config);
-        console.log(res.data);
-
-       } catch (err) {
-           console.log(err.response.data)
-       }
-       */
-      console.log('SUCCESS')
+      console.log(name)
+      console.log(email)
+      console.log(password)
+      register({name,email,password})
     }
 }
 
@@ -119,7 +99,8 @@ const onSubmit = async e => {
 }
 
 Register.propTypes = {
-  setAlert: PropTypes.func.isRequired
+  setAlert: PropTypes.func.isRequired,
+  register: PropTypes.func.isRequired
 }
 
-export default connect(null,{setAlert})(Register)
+export default connect(null,{setAlert,register})(Register)
