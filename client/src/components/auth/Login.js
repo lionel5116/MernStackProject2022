@@ -1,11 +1,15 @@
 import React , {Fragment,useState} from 'react'
+import { connect } from 'react-redux';
 import {Link} from 'react-router-dom';
-//import axios from 'axios';
+import { setAlert } from '../../actions/alert';
+import { register } from '../../actions/auth';
+import PropTypes from 'prop-types';
 
-const Login = () => {
+
+const Login = ({setAlert,register}) => {
   const[formData,setFormData] = useState( {
       email:'',
-      password:'',
+      password:''
   });
 
 const {email,password} = formData;
@@ -14,7 +18,7 @@ const onChange = e => setFormData({...formData,[e.target.name]:e.target.value});
 
 const onSubmit = async e => {
     e.preventDefault();
-      console.log('SUCCESS')
+   console.log('SUCCESS')
 }
 
   return (
@@ -22,7 +26,7 @@ const onSubmit = async e => {
       <section className='container'>
         <h1 className='large text-primary'>Sign In</h1>
         <p className='lead'>
-          <i className='fas fa-user'></i>Sin into Your Account
+          <i className='fas fa-user'></i>Sign Into Your Account
         </p>
         <form className='form' onSubmit={e => onSubmit(e)}>
          
@@ -35,6 +39,7 @@ const onSubmit = async e => {
               value={email}
               onChange={(e) => onChange(e)}
             />
+          
           </div>
           <div className='form-group'>
             <input
@@ -50,7 +55,7 @@ const onSubmit = async e => {
           <input type='submit' className='btn btn-primary' value='Login' />
         </form>
         <p className='my-1'>
-          Dont't have an account? 
+             Dont' have an account
            <Link to='/Register' className="btn btn-light">
             Sign Up
           </Link>
@@ -60,4 +65,9 @@ const onSubmit = async e => {
   );
 }
 
-export default Login
+Login.propTypes = {
+  setAlert: PropTypes.func.isRequired,
+  register: PropTypes.func.isRequired
+}
+
+export default connect(null,{setAlert,register})(Login)
