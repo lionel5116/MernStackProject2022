@@ -1,13 +1,13 @@
 import React , {Fragment,useState} from 'react'
 import { connect } from 'react-redux';
-import {Link} from 'react-router-dom';
+import {Link, Navigate} from 'react-router-dom';
 import { setAlert } from '../../actions/alert';
 import { register } from '../../actions/auth';
 import PropTypes from 'prop-types';
 
 //below we are using destructuring (as opposee to using props), when we want to call,
 // we dont need to add props.setAlert, just set alert
-const Register = ({setAlert,register}) => {
+const Register = ({setAlert,register,isAuthenticated}) => {
   const[formData,setFormData] = useState( {
       name:'',
       email:'',
@@ -28,6 +28,13 @@ const onSubmit = async e => {
     else{
       register({name,email,password})
     }
+}
+
+//Redirect if loggin in
+if(isAuthenticated) {
+  return <Navigate to="/dasboard">
+
+  </Navigate>
 }
 
   return (
@@ -97,7 +104,12 @@ const onSubmit = async e => {
 
 Register.propTypes = {
   setAlert: PropTypes.func.isRequired,
-  register: PropTypes.func.isRequired
+  register: PropTypes.func.isRequired,
+  isAuthenticated: PropTypes.bool
 }
 
-export default connect(null,{setAlert,register})(Register)
+const mapStateToProps = state => ({
+  isAuthenticated: state.auth.isAuthenticated
+});
+
+export default connect(mapStateToProps,{setAlert,register})(Register)
