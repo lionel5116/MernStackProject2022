@@ -32,7 +32,7 @@ const onSubmit = async e => {
 
 //Redirect if loggin in
 if(isAuthenticated) {
-  return <Navigate to="/dasboard">
+  return <Navigate to="/Dashboard">
 
   </Navigate>
 }

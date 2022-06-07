@@ -24,7 +24,7 @@ const onSubmit = async e => {
 
   //Redirect if loggin in
   if(isAuthenticated) {
-    return <Navigate to="/dasboard">
+    return <Navigate to="/Dashboard">
 
     </Navigate>
   }
@@ -75,7 +75,7 @@ const onSubmit = async e => {
 
 Login.propTypes = {
   //setAlert: PropTypes.func.isRequired,
-  Login: PropTypes.func.isRequired,
+  login: PropTypes.func.isRequired,
   isAuthenticated: PropTypes.bool
 };
 
