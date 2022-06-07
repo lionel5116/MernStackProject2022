@@ -43,6 +43,7 @@ const App = () =>  {
               </ProtectedRoute>
                }
                />
+               
             {/*<PrivateRoute path='/Dashboard' element={<Dashboard />} />*/}
         </Routes>
       </Fragment>
