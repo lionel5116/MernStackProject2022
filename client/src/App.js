@@ -8,6 +8,7 @@ import Register from './components/auth/Register';
 import Alert from './components/layout/Alert';
 import Dashboard from './components/dashboard/Dashboard';
 import ProtectedRoute from './components/routing/ProtectedRoute';
+import CreateProfile from './components/profile-form/CreateProfile';
 
 //Redux
 import {Provider} from 'react-redux';
@@ -41,6 +42,12 @@ const App = () =>  {
               <ProtectedRoute >
                  <Dashboard />
               </ProtectedRoute>
+               }
+               />
+               <Route path='/create-profile' element={
+                <ProtectedRoute >
+                  <CreateProfile />
+                </ProtectedRoute>
                }
                />
         </Routes>

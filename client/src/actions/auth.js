@@ -69,6 +69,7 @@ export const register = ({name,email,password}) => async dispatch => {
 };
 
 //Login User
+//the dispatch used in the try/catches are defined with the dispatch in the funtion signature
 export const login = (email,password) => async dispatch => {
     const config = {
         headers: {
