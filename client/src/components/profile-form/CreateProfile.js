@@ -1,15 +1,18 @@
 import React from 'react'
 import { useState,Fragment } from 'react';
-import { Link } from 'react-router-dom';
+//import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux';
 import { createProfile } from '../../actions/profile';
+import { useNavigate ,Navigate} from 'react-router-dom';
+
 
 import {
     useLocation,
-    useNavigate,
+    //useNavigate,
     useParams
   } from "react-router-dom";
+ 
 
   function withRouter(Component) {
     function ComponentWithRouterProp(props) {
@@ -28,7 +31,9 @@ import {
   }
 
 //racfp
-const CreateProfile = ({createProfile,history}) => {
+const CreateProfile = ({createProfile}) => {
+
+
    const[formData, setFormData] = useState({
     company: '',
     webSite: '',
@@ -45,6 +50,7 @@ const CreateProfile = ({createProfile,history}) => {
    });
 
    const[displaySocialInputs,toggleSocialInputs] = useState(false);
+
 
   const {
     company,
@@ -64,11 +70,20 @@ const CreateProfile = ({createProfile,history}) => {
 
   const onChange = e => setFormData({...formData, [e.target.name]: e.target.value});
 
+
+
    const onSubmit = e => {
        e.preventDefault();
-       createProfile(formData,history,true)
+       createProfile(formData)
+      // reactToDasboard();
    }
 
+ const reactToDasboard = () => {
+    return <Navigate to="/Dashboard">
+
+    </Navigate>
+ }
+ 
   return (
     <Fragment>
     <section className="container">
@@ -187,4 +202,4 @@ CreateProfile.propTypes = {
 
 
 //we have to wrap the CreateProfile with the withRouter in order to use the history action
-export default connect(null,{createProfile})(withRouter(CreateProfile))
+export default connect(null,{createProfile})(CreateProfile);

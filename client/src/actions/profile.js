@@ -1,6 +1,7 @@
 import axios from "axios";
 import { setAlert } from "./alert";
 
+
 import { GET_PROFILE,
          PROFILE_ERROR} from "./types";
 
@@ -27,7 +28,8 @@ export const getCurrentUserProfile = () => async dispatch => {
 
 //Create or Update a profile
 //the dispatch used in the try/catches are defined with the dispatch in the funtion signature
-export const createProfile = (formData,history,edit = false) => async dispatch => {
+export const createProfile = (formData,edit = false) => async dispatch => {
+
   try {
     const config = {
       headers: {
@@ -40,14 +42,17 @@ export const createProfile = (formData,history,edit = false) => async dispatch =
       payload: res.data
     });
 
-    dispatch(setAlert(edit ? 'Profile Updated' : 'Profile Created'));
+    dispatch(setAlert(edit ? 'Profile Updated' : 'Profile Created','success'));
 
+    
     if(!edit) {
-      history.push('/dashboard');
+    
     }
-
+    
+    
   } catch (err) {
 
+    console.log(err);
     const errors = err.response.data.errors;
     if(errors) {
       errors.forEach(error => dispatch(setAlert(error.msg,'danger')));  
