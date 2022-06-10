@@ -11,7 +11,6 @@ import { GET_PROFILE,
 export const getCurrentUserProfile = () => async dispatch => {
     try {
         const res = await axios.get('/api/profile/me');
-
         dispatch( {
           type: GET_PROFILE,
           payload: res.data
@@ -29,7 +28,7 @@ export const getCurrentUserProfile = () => async dispatch => {
 //Create or Update a profile
 //the dispatch used in the try/catches are defined with the dispatch in the funtion signature
 export const createProfile = (formData,edit = false) => async dispatch => {
-
+  console.log(formData);
   try {
     const config = {
       headers: {
