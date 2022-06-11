@@ -10,6 +10,8 @@ import Dashboard from './components/dashboard/Dashboard';
 import ProtectedRoute from './components/routing/ProtectedRoute';
 import CreateProfile from './components/profile-form/CreateProfile';
 import EditProfile from './components/profile-form/EditProfile';
+import AddExperience from './components/profile-form/AddExperience';
+import AddEducation from './components/profile-form/AddEducation';
 
 //Redux
 import {Provider} from 'react-redux';
@@ -17,6 +19,7 @@ import store from './store';
 
 import setAuthToken from './utils/SetAuthToken';
 import { loadUser } from './actions/auth';
+
 
 if(localStorage.token) {
   setAuthToken(localStorage.token)
@@ -28,38 +31,60 @@ const App = () =>  {
    },[]);
 
   return (
-  <Provider store={store}>
-    <Router>
-      <Fragment>
-        <Navbar />
-        <section className='container'>
-          <Alert />
-        </section>
-        <Routes>
-          <Route path='/' element={<Landing />} />
+    <Provider store={store}>
+      <Router>
+        <Fragment>
+          <Navbar />
+          <section className='container'>
+            <Alert />
+          </section>
+          <Routes>
+            <Route path='/' element={<Landing />} />
             <Route path='/Login' element={<Login />} />
             <Route path='/Register' element={<Register />} />
-            <Route path='/Dashboard' element={
-              <ProtectedRoute >
-                 <Dashboard />
-              </ProtectedRoute>
-               }
-               />
-               <Route path='/create-profile' element={
-                <ProtectedRoute >
+            <Route
+              path='/Dashboard'
+              element={
+                <ProtectedRoute>
+                  <Dashboard />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path='/create-profile'
+              element={
+                <ProtectedRoute>
                   <CreateProfile />
                 </ProtectedRoute>
-               }
-               />
-                <Route path='/edit-profile' element={
-                <ProtectedRoute >
+              }
+            />
+            <Route
+              path='/edit-profile'
+              element={
+                <ProtectedRoute>
                   <EditProfile />
                 </ProtectedRoute>
-               }
-               />
-        </Routes>
-      </Fragment>
-    </Router>
-  </Provider>
-)};
+              }
+            />
+            <Route
+              path='/add-experience'
+              element={
+                <ProtectedRoute>
+                  <AddExperience />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path='/add-education'
+              element={
+                <ProtectedRoute>
+                  <AddEducation />
+                </ProtectedRoute>
+              }
+            />
+          </Routes>
+        </Fragment>
+      </Router>
+    </Provider>
+  );};
 export default App;
