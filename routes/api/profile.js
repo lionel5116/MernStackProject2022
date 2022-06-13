@@ -6,6 +6,8 @@ const auth = require('../../middleware/auth');
 
 const Profile = require('../../models/Profile');
 const User = require('../../models/User');
+const Post = require('../../models/Post');
+
 const { check, validationResult } = require('express-validator');
 
 //@route GET api/profile/me (you don't have to include the /profile in the route below, just the /me)
@@ -163,7 +165,9 @@ router.get('/user/:user_id', async (req, res) => {
 //@access private  - USE ATUH MIDDLEWARE WHEN PROVIDING A TOKEN!!!!!
 router.delete('/', auth, async (req, res) => {
   try {
-    //@todo - remove users post
+    // remove users posts
+    await Post.deleteMany({ user: req.user.id });
+    
     //remove profile
     await Profile.findOneAndRemove({ user: req.user.id });
     //remove user
@@ -206,6 +210,11 @@ router.put(
       current,
       description,
     };
+
+    if(newExp.current === '')
+    {
+      newExp.current = false;
+    }
 
     try {
       const profile = await Profile.findOne({ user: req.user.id });
@@ -273,6 +282,11 @@ router.put(
       current,
       description,
     };
+
+    if(newEdu.current === '')
+    {
+      newEdu.current = false;
+    }
 
     try {
       const profile = await Profile.findOne({ user: req.user.id });

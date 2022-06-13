@@ -3,9 +3,10 @@ import PropTypes from 'prop-types'
 import {connect } from 'react-redux';
 import Moment from 'react-moment';
 import { getCurrentUserProfile } from '../../actions/profile';
+import { deleteEducation } from '../../actions/profile';
 
-const Education = ({getCurrentUserProfile,
-    profile:{profile}}) => {
+//make sure that you include your action(s) within the curly braces or you will get a .. is not a function error
+const Education = ({getCurrentUserProfile,profile:{profile},deleteEducation}) => {
     
     useEffect (() => {
         getCurrentUserProfile();
@@ -19,7 +20,9 @@ const Education = ({getCurrentUserProfile,
                 edu.to === null ? ('Now') : (<Moment format='YYYY/MM/DD'>{edu.to}</Moment>)
             }
         </td>
-        <td><button className='btn btn-danger'>Delete</button></td>
+        <td><button 
+          onClick={() => deleteEducation(edu._id)}
+          className='btn btn-danger'>Delete</button></td>
        </tr>
     ));
   return (
@@ -46,10 +49,11 @@ const Education = ({getCurrentUserProfile,
 
 Education.propTypes = {
     profile:PropTypes.object.isRequired,
+    deleteEducation:PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({
     profile: state.profile
   });
 
-export default connect(mapStateToProps,{getCurrentUserProfile})(Education);
+export default connect(mapStateToProps,{getCurrentUserProfile,deleteEducation})(Education);

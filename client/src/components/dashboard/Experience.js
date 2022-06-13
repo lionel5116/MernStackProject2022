@@ -3,9 +3,10 @@ import PropTypes from 'prop-types'
 import {connect } from 'react-redux';
 import Moment from 'react-moment';
 import { getCurrentUserProfile } from '../../actions/profile';
+import { deleteExperience } from '../../actions/profile';
 
-const Experience = ({getCurrentUserProfile,
-    profile:{profile}}) => {
+////make sure that you include your action(s) within the curly braces or you will get a .. is not a function error
+const Experience = ({getCurrentUserProfile,deleteExperience,profile:{profile}}) => {
     
     useEffect (() => {
         getCurrentUserProfile();
@@ -19,7 +20,8 @@ const Experience = ({getCurrentUserProfile,
                 exp.to === null ? ('Now') : (<Moment format='YYYY/MM/DD'>{exp.to}</Moment>)
             }
         </td>
-        <td><button className='btn btn-danger'>Delete</button></td>
+        <td><button onClick={() =>deleteExperience(exp._id)} 
+                    className='btn btn-danger'>Delete</button></td>
        </tr>
     ));
   return (
@@ -46,10 +48,11 @@ const Experience = ({getCurrentUserProfile,
 
 Experience.propTypes = {
     profile:PropTypes.object.isRequired,
+    deleteExperience: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({
     profile: state.profile
   });
 
-export default connect(mapStateToProps,{getCurrentUserProfile})(Experience);
+export default connect(mapStateToProps,{getCurrentUserProfile,deleteExperience})(Experience);
