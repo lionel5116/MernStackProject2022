@@ -13,7 +13,9 @@ const Dashboard = ({getCurrentUserProfile,auth: {user},profile:{profile,loading}
   useEffect (() => {
     getCurrentUserProfile();
   },[]);
-  return loading && profile === null ? <Spinner /> :  <Fragment>
+  return loading && profile === null ? <Spinner /> :  
+  <section className='container'>
+   <Fragment>
      <h1 className='large text-primary'>
        Dashboard
      </h1>
@@ -41,6 +43,7 @@ const Dashboard = ({getCurrentUserProfile,auth: {user},profile:{profile,loading}
       </Link>
     </Fragment>)}
    </Fragment>
+   </section>
    
 };
 
