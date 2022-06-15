@@ -12,12 +12,12 @@ const ProfileTop = ({profile: {status,company,location,website,social,
     <div className="profile-top bg-primary p-2">
     <img
       className="round-img my-1"
-      src={''}
+      src={avatar}
       alt=""
     />
-    <h1 className="large">John Doe</h1>
-    <p className="lead">Developer at Microsoft</p>
-    <p>Seattle, WA</p>
+    <h1 className="large">{name}</h1>
+    <p className="lead">{company}</p>
+    <p>{location}</p>
     <div className="icons my-1">
       <a href="#" target="_blank" rel="noopener noreferrer">
         <i className="fas fa-globe fa-2x"></i>

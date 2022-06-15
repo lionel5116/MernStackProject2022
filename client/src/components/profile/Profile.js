@@ -33,11 +33,11 @@ const Profile = ({
               auth.loading === false &&
               auth.user._id === profile.user._id && (
                 <Link to='/edit-profile' className='btn btn-dark'>
-                  Edit Profile {profile.company}
+                  Edit Profile 
                 </Link>
               )}
         <div className='profile-grid my-1'>
-          <ProfileTop profile/>
+          <ProfileTop profile={profile}/>
         </div>
           </Fragment>
         )}
