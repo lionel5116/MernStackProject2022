@@ -12,7 +12,7 @@ import { deleteAccount } from '../../actions/profile';
 const Dashboard = ({getCurrentUserProfile,auth: {user},profile:{profile,loading},deleteAccount}) => {
   useEffect (() => {
     getCurrentUserProfile();
-  },[]);
+  },[getCurrentUserProfile]);
   return loading && profile === null ? <Spinner /> :  
   <section className='container'>
    <Fragment>

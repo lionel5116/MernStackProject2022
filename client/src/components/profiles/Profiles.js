@@ -10,7 +10,7 @@ const Profiles = ({getProfiles,profile:{profiles,loading}}) => {
     
     useEffect(() => {
         getProfiles();
-    },[]);
+    },[getProfiles]);
 
   return <section className='container'>
   <Fragment>

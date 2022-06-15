@@ -52,7 +52,7 @@ export const getProfiles = () => async dispatch => {
 export const getProfileById = userId => async dispatch => {
 
   try {
-      const res = await axios.get(`/api/profile/${userId}`);
+      const res = await axios.get(`/api/profile/user/${userId}`);
       dispatch( {
         type: GET_PROFILE,
         payload: res.data
@@ -229,7 +229,7 @@ export const deleteAccount = id => async dispatch => {
     try {
 
       const res = await axios.delete(`/api/profile/`);
-
+      console.log(res)
       dispatch( {type: CLEAR_PROFILE});
       dispatch( {type: ACCOUNT_DELETED});
 

@@ -6,7 +6,7 @@ import {connect} from 'react-redux';
 import { createProfile,getCurrentUserProfile } from '../../actions/profile';
 
 
-
+/*
 import {
     useLocation,
     useNavigate,
@@ -14,6 +14,7 @@ import {
   } from "react-router-dom";
  
 
+  
   function withRouter(Component) {
     function ComponentWithRouterProp(props) {
       let location = useLocation();
@@ -29,6 +30,7 @@ import {
   
     return ComponentWithRouterProp;
   }
+  */
 
 //racfp
 const EditProfile = ({profile:{profile,loading},createProfile,getCurrentUserProfile}) => {
@@ -86,12 +88,9 @@ const EditProfile = ({profile:{profile,loading},createProfile,getCurrentUserProf
     twitter: loading || !profile.social.twitter ? '' : profile.social.twitter,
     instagram: loading || ! profile.social.instagram ? '' : profile.social.instagram,
     linkedin: loading || !profile.social.linkedin ? '' : profile.social.linkedin
-    
-
-    
     });
 
-  },[loading]);
+  },[loading,getCurrentUserProfile]);
 
    const onSubmit = e => {
        e.preventDefault();
