@@ -4,38 +4,35 @@ import {Link} from 'react-router-dom';
 import Moment from 'react-moment';
 import {connect} from 'react-redux';
 
-const PostItem = ({post}) => {
+const PostItem = ({auth,post: {_id,text,name,avatar,user,likes,comments,date}}) => {
   return (
     <div className="post bg-white p-1 my-1">
           <div>
             <a href="profile.html">
               <img
                 className="round-img"
-                src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200"
+                src={avatar}
                 alt=""
               />
-              <h4>John Doe</h4>
+              <h4>{name}</h4>
             </a>
           </div>
           <div>
             <p className="my-1">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint
-              possimus corporis sunt necessitatibus! Minus nesciunt soluta
-              suscipit nobis. Amet accusamus distinctio cupiditate blanditiis
-              dolor? Illo perferendis eveniet cum cupiditate aliquam?
+             {text}
             </p>
              <p className="post-date">
-                Posted on 04/16/2019
+             Posted on <Moment format='YYYY/MM/DD'>{date}</Moment>
             </p>
             <button type="button" className="btn btn-light">
               <i className="fas fa-thumbs-up"></i>
-              <span>4</span>
+              <span>{likes.length}</span>
             </button>
             <button type="button" className="btn btn-light">
               <i className="fas fa-thumbs-down"></i>
             </button>
             <a href="post.html" className="btn btn-primary">
-              Discussion <span className='comment-count'>2</span>
+              Discussion <span className='comment-count'>{comments.length}</span>
             </a>
             <button      
             type="button"
