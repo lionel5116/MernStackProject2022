@@ -10,26 +10,31 @@ const Posts = ({getPosts,post: {posts,loading}}) => {
     useEffect(() => {
         getPosts()
     },[getPosts])
-  return (
-    loading ? <Spinner /> :
+  return loading ? (
+    <Spinner />
+  ) : (
     <section className='container'>
-     <Fragment>
-        <h1 className='large text-primary'>
-          Posts
-        </h1>
+      <Fragment>
+        <h1 className='large text-primary'>Posts</h1>
         <p className='lead'>
           <i className='fas fa-user'></i>Welcome to the community
         </p>
         <PostForm />
         <div>
-            {/*NOTICE HOW WE REFERENCE posts and not post from our array destructring */}
-            {posts.map(post => (
-               <PostItem key={post._id} post={post}/>
-            ))}
+          {/*NOTICE HOW WE REFERENCE posts and not post from our array destructring */}
+          {posts.length > 0 ? (
+            <Fragment>
+              {posts.map((post) => (
+                <PostItem key={post._id} post={post} />
+              ))}
+            </Fragment>
+          ) : (
+            <h4>No Posts Found</h4>
+          )}
         </div>
-     </Fragment>
+      </Fragment>
     </section>
-  )
+  );
 }
 
 Posts.propTypes = {
