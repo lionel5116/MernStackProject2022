@@ -1,9 +1,9 @@
 import React,{useState} from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { addComment, deletComment } from '../../actions/post'
+import { addComment, deleteComment } from '../../actions/post'
 
-const CommentForm = ({addComment,deletComment,postId}) => {
+const CommentForm = ({addComment,deleteComment,postId}) => {
     const [text,setText] = useState('');
 
   return (
@@ -44,4 +44,4 @@ const mapStateToProps = state => ( {
 
 })
 
-export default connect(mapStateToProps,{addComment,deletComment})(CommentForm)
+export default connect(mapStateToProps,{addComment,deleteComment})(CommentForm)
