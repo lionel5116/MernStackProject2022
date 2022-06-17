@@ -4,7 +4,9 @@ import {
   UPDATE_LIKES,
   DELETE_POST,
   ADD_POST,
-  GET_POST
+  GET_POST,
+  ADD_COMMENT,
+  REMOVE_COMMENT
 } from '../actions/types';
 
 const initialState = {
@@ -56,6 +58,21 @@ export default function postReducer(state = initialState, action) {
         ),
         loading: false,
       };
+      case ADD_COMMENT:
+        return {
+          ...state,
+          post: {...state.post, comments: payload},
+        loading: false,
+        };
+        case REMOVE_COMMENT:
+          return {
+            ...state,
+            post: {
+              //!== commentID will bring back all comments except for the one that was deleted
+              comments: state.post.comments.filter(comment => comment._id !== payload)
+            },
+        loading: false,
+          };
     default:
       return state;
   }
