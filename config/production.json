@@ -1,0 +1,6 @@
+{
+    "mongoURI" : "mongodb+srv://lionel5116:Mag17615%40@cluster0.jwcnt.mongodb.net/?retryWrites=true&w=majority",
+    "jwtSecretToken":"mysecrettoken",
+    "githubClientID":"9dfb0c77360374cccc5c",
+    "githubSecret":"e1c82289f4ef400d3c39f74ae79ac9b2d73ffff9"
+}
